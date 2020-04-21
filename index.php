@@ -18,6 +18,7 @@ if(isset($_POST['btn_save'])){
     $con->closeDB();
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +42,40 @@ if(isset($_POST['btn_save'])){
             <td><button class="button" type="submit" name="btn_save"><strong>Save</strong></button></td>
         </tr>
     </table>
+</form>
+<form method="post" class="form">
+    <button type="submit" class="btn btn-dark" name="read_all">Read All</button>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    if(isset($_POST['read_all'])){
+        $conn = new DBconnect();
+        $stmt = "SELECT * FROM `users`";
+        $res = mysqli_query($conn->conn,$stmt);
+        foreach ($res as $u){
+            echo "<tr class='row'>";
+            echo "<td>";
+            echo $u['first_name'];
+            echo "</td>";
+            echo "<td>";
+            echo $u['last_name'];
+            echo "</td>";
+
+            echo "</tr>";
+        }
+        $conn->closeDB();
+    }
+    ?>
+    </tbody>
+
+</table>
 </form>
 </body>
 

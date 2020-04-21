@@ -22,6 +22,7 @@ class User implements Crud{
         $this->user_city = $user_city;
     }
 
+
     /**
      * @return mixed
      */
@@ -38,12 +39,10 @@ class User implements Crud{
         $this->user_id = $user_id;
     }
 
-
-
-
-
     public function save()
     {
+        // TODO: Implement save() method.
+
         $con = new DBconnect();
         $fn = $this->first_name;
         $ln = $this->last_name;
@@ -51,8 +50,11 @@ class User implements Crud{
 
         $stmt = "INSERT INTO users (first_name,last_name,user_city)
                  VALUES ('$fn','$ln','$city')";
-//        $con = new DBconnect();
-          $res = mysqli_query($con->conn,$stmt);
+
+        $res = mysqli_query($con->conn,$stmt);
+
+
+//The following method still works, but doesn't use the DBConnect class....
 
 //        $ms = new mysqli(DBServer,username,password,DBName);
 //        $res = $ms->query($stmt);
@@ -63,13 +65,16 @@ class User implements Crud{
 //            INSERT INTO users (first_name,last_name,user_city)
 //            VALUES('$fn,$ln,$city') ") or die(mysqli_error());
         return $res;
-        // TODO: Implement save() method.
+
     }
 
     public function readAll()
     {
-
         // TODO: Implement readAll() method.
+        $conn = new DBconnect();
+        $stmt = "SELECT * FROM `users`";
+        $res = mysqli_query($conn->conn,$stmt);
+
     }
 
     public function readUnique()
