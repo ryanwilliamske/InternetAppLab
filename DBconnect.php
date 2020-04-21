@@ -19,12 +19,9 @@ class DBconnect
             password,
             DBName)
         or die(mysqli_error());
-
     }
 
     public function closeDB(){
         mysqli_close($this->conn);
     }
-
-
 }
